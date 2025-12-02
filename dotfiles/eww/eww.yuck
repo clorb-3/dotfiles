@@ -1,0 +1,162 @@
+
+(defwindow bar 
+  :monitor 0
+  :geometry (geometry
+    :x "0%"
+    :y "0px"
+    :width "100%"
+    :height "32px"
+    :anchor "top center"
+  )
+  :stacking "fg"
+  :exclusive true
+  (bar)
+)
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'"
+)
+
+(defwidget bar []
+  (centerbox
+    :orientation "horizontal"
+    (right_side) (middle) (left_side)
+  )
+)
+
+(defwidget right_side []
+  (box
+    :orientation "horizontal"
+    :halign "start"
+    :space-evenly false
+    :spacing 0
+    (workspaces)
+    (window_w)
+    (color-right) 
+  )
+)
+
+(defwidget left_side []
+  (box
+    :space-evenly false
+    :halign "end"
+    :orientation "horizontal"
+    (ram)
+    (battery)
+  )
+)
+
+(defwidget battery []
+  (label 
+    :limit-width 6
+    :halign "end"
+    :text "${EWW_BATTERY["BAT0"].capacity}%"
+  )
+)
+
+(defwidget ram []
+  (label 
+    :limit-width 6
+    :halign "end" 
+    :text {EWW_RAM.used_mem_perc}
+  )
+)
+
+(defwidget middle []
+  (box
+    :class "clock-widget"
+    (label
+      :text time
+    )
+  )
+)
+
+(deflisten workspaces 
+  :initial "[]" "bash ~/.config/eww/scripts/get-workspaces"
+)
+
+(deflisten current_workspace 
+  :initial "1" "bash ~/.config/eww/scripts/get-active-workspace"
+)
+
+(defwidget workspaces []
+  (box
+  :class "overlap workspaces"
+    (eventbox 
+      :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" 
+      :class "workspaces-widget"
+      (box 
+        :space-evenly true
+        :halign "start"
+        :spacing 0
+        :width 0
+        :class "workspace-entry-contaner"
+         ; (label 
+         ;   :text "${workspaces}${current_workspace}" 
+         ;   :visible false
+         ; )
+        (for workspace in workspaces
+          (box 
+            :visible {workspace.windows > 0 || workspace.id == current_workspace }
+            (eventbox 
+              :onclick "hyprctl dispatch workspace ${workspace.id}"
+              (box
+              :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""}"
+                (label 
+                  :text "${workspace.id}" 
+                  :class "workspace-entry text"
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+
+(deflisten window 
+  :initial "..." "sh ~/.config/eww/scripts/get-window-title"
+)
+
+(defwidget window_w []
+  (box
+    :class "overlap window"
+    (eventbox
+      :class "window-widget" 
+      :halign "start"
+      (label 
+        :text "${window}"
+        :limit-width 30
+        :class "window"
+      )
+    )
+  )
+)
+
+(defwidget color-right []
+  (box
+  :space-evenly false
+  (box
+  :class "overlap blue"
+    (box
+    :class "yellow color"
+    )
+  ) 
+  (box
+  :class "overlap purple"
+    (box
+    :class "blue color"
+    )
+  ) 
+  (box
+  :class "overlap"
+    (box
+    :class "purple color"
+    )
+  )
+) 
+) 
+
+

@@ -1,0 +1,110 @@
+* {
+  color: #f9f5d7;
+}
+
+.bar {
+  background-color: transparent;
+  color: #b0b4bc;
+  font-size: 16px;
+}
+
+button {
+  background-image: unset;
+  box-shadow: unset;
+  text-shadow: unset;
+  border: unset;
+  margin: unset;
+}
+
+/* clock */
+
+.clock-widget {
+  background-color: #689d6a;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 16px;
+}
+
+/* color widgets for right side */
+
+.overlap.window {
+  padding-right: 10px;
+  background-color: #d79921;
+}
+
+.color-widget {}
+
+.color {
+  padding-right: 16px;
+  border-bottom-right-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.overlap {
+  padding-right: 10px;
+}
+
+.yellow {
+  background-color: #d79921;
+}
+
+.blue {
+  background-color: #458588;
+}
+
+.purple {
+  background-color: #b16286;
+}
+
+/* window widget */
+
+.window-widget {
+  background-color: #98971a;
+  padding: 30px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.window {
+  padding-right: 16px;
+}
+
+.overlap.workspaces {
+  background-color: #98971a;
+  padding-right: 10px;
+}
+
+/* workspace widget */
+
+.workspaces-widget {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-color: #cc241d;
+  font-weight: bolder;
+  /*  border: #9d0006 2px solid;
+  border-left: unset;*/
+}
+
+box.workspace-entry {
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+box.workspace-entry:hover {
+  background-color: #9d0006;
+
+}
+
+.workspace-entry-contaner {
+  margin-right: 16px;
+}
+
+.workspace-entry.text {
+  margin: 0px;
+  border-radius: 50%;
+
+}
+
+box.workspace-entry.current {
+  color: #928374;
+}
