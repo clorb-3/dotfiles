@@ -1,1 +1,2 @@
 this is my first "project" so its also my first time adding local files to github using git. this it a test file to make sure i can actualy get git to work.
+it seemed to have worked but it's always to try to do things a few times.
